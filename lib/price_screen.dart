@@ -8,7 +8,6 @@ class PriceScreen extends StatefulWidget {
 
 class _PriceScreenState extends State<PriceScreen> {
   String selectedCurrency = 'USD';
-  CoinData coinData = CoinData();
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +47,7 @@ class _PriceScreenState extends State<PriceScreen> {
             color: Colors.lightBlue,
             child: DropdownButton<String>(
               value: selectedCurrency,
-              items: coinData.toDropdownMenuItems(),
+              items: currenciesListAsDropdownMenuItems(),
               onChanged: (String value) {
                 setState(() {
                   selectedCurrency = value;
