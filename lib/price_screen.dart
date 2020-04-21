@@ -1,4 +1,5 @@
 import 'package:bitcoin_ticker/coin_data.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PriceScreen extends StatefulWidget {
@@ -8,6 +9,20 @@ class PriceScreen extends StatefulWidget {
 
 class _PriceScreenState extends State<PriceScreen> {
   String selectedCurrency = 'USD';
+
+  List<Text> test() {
+    List<Text> result = [];
+    for (String item in currenciesList)
+      result.add(
+        Text(
+          item,
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+      );
+    return result;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,20 +56,29 @@ class _PriceScreenState extends State<PriceScreen> {
             ),
           ),
           Container(
-            height: 150.0,
-            alignment: Alignment.center,
-            padding: EdgeInsets.only(bottom: 30.0),
-            color: Colors.lightBlue,
-            child: DropdownButton<String>(
-              value: selectedCurrency,
-              items: currenciesListAsDropdownMenuItems(),
-              onChanged: (String value) {
-                setState(() {
-                  selectedCurrency = value;
-                });
-              },
-            ),
-          ),
+              height: 150.0,
+              alignment: Alignment.center,
+              padding: EdgeInsets.only(bottom: 30.0),
+              color: Colors.lightBlue,
+//            child: DropdownButton<String>(
+//              value: selectedCurrency,
+//              items: currenciesListAsDropdownMenuItems(),
+//              onChanged: (String value) {
+//                setState(() {
+//                  selectedCurrency = value;
+//                });
+//              },
+//            ),
+              child: CupertinoPicker(
+                children: test(),
+                itemExtent: 32,
+                backgroundColor: Colors.lightBlue,
+                onSelectedItemChanged: (int value) {
+                  setState(() {
+                    selectedCurrency = value.toString();
+                  });
+                },
+              )),
         ],
       ),
     );
